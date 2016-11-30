@@ -43,19 +43,16 @@ void setup() {
   UCSR0B  =0x98;                                    //ACTIVA TX Y RX A SI COM LA INT DEL RX
   UCSR0C  =0x06;                                    //CONFIGURAMOS A 8BITS DE DATOS SERIAL
   UBRR0H  =0x00;                                    //VALOR QUE SE LE CARGA AL REGISTRO HIGH 0
-  UBRR0L  =0x67;                                    //VALOR QUE SE LE CARGA AL REGISTRO LOW 0x67 QUE ES IGUAL A 103 PARA 960
+  UBRR0L  =0x67;                                    //VALOR QUE SE LE CARGA AL REGISTRO LOW 0x67 QUE ES IGUAL A 103 PARA 9600
   
 //////////////////////////////////////////////////////////////////////////////  
-   pinMode(5, OUTPUT);                            //PIN PARA EL ENCENDIDO DEL SIM5320
+   pinMode(5, OUTPUT);                              //PIN PARA EL ENCENDIDO DEL SIM5320
    pinMode(0, INPUT);                               //
-   SIM5320_ON();                                  //ENCIENDO EL SIM
-  //Serial.begin(9600);
-  RS485.begin(2400);                                // velocidad de sensor corrosion
-  SIM5320.begin(9600);
-  delay(10000);
-  SETUP_SIM5320();                                 //INICIALIZA EL SIM
-//  sensors.begin();
-
+   SIM5320_ON();                                    //ENCIENDO EL SIM
+   RS485.begin(2400);                               // velocidad de sensor corrosion
+   SIM5320.begin(9600);
+   delay(10000);
+   SETUP_SIM5320();                                 //INICIALIZA EL SIM
 }
 
 
@@ -89,11 +86,7 @@ void voltaje_bateria()
   
   BAT_V=BUFFER_USART2;
   LIMPIA_BUFFER();
-     
-  //SIM5320.print("AT+CIPCLOSE=");
-  //SIM5320.println(BAT_V);
-  //delay(100);
-     
+    
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void sensor_corrosion()
@@ -235,7 +228,7 @@ void SETUP_SIM5320()
   SIM5320.println(F("AT+CSQ"));            //NIVEL DE LA SEÑAL
   delay(250);
 
-  SIM5320.println(F("AT+CREG?"));          //
+  SIM5320.println(F("AT+CREG?"));         
   delay(250);
 
   SIM5320.println(F("AT+COPS?"));
@@ -267,20 +260,20 @@ void SETUP_SIM5320()
 }
 
 ////////////////////////////////////////////////////////////
-void COPIA_BUFFER(int P,int W)                       // FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
+void COPIA_BUFFER(int P,int W)                       //VARIABLES DE RX
 {
   //K=0;
   COPY=1;                                 
     X=0;
       Z=-1;
       for (int i=0; i<99;i++)
-        {BUFFER_USART2[i]=NULL;}                  //CADA POSICION DEL STRING LE PONE CARACTER NULL 00
+        {BUFFER_USART2[i]=NULL;}                  //NULL 00
           I=P; 
             D=W;
  //return K;
 }
 
-void LIMPIA_BUFFER()                          // FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
+void LIMPIA_BUFFER()                          // FUNCION QUE LIMPIA EL BUFFER
 {
   COPY=0;
     X=0;

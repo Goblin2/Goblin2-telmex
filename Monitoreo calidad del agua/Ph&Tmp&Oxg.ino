@@ -99,12 +99,12 @@ void setup() {
   UBRR0L  =0x67;                                    //VALOR QUE SE LE CARGA AL REGISTRO LOW 0x67 QUE ES IGUAL A 103 PARA 9600
 //////////////////////////////////////////////////////////////////////////////
  SIM5320.begin(9600);
-  pinMode(14, INPUT);                                 // SESONR PH A0
+  pinMode(14, INPUT);                               // SESONR PH A0
   pinMode(5, OUTPUT);                                 
   analogReference(DEFAULT);
 ////////////////////////////////////////
-  digitalWrite(5, HIGH);
-  delay(2000);//                                     //ENCIENDE EL SIM5320
+  digitalWrite(5, HIGH);                            //ENCIENDE EL SIM5320
+  delay(2000);//                                    
   digitalWrite(5, LOW);
   delay(2000);
     
@@ -119,11 +119,11 @@ void setup() {
 void loop() {
 
 PH_ADC();                                    //FUNCION PARA LEER LA VARIABLE DEL SENSOR DE PH
-WEB();                                       FUNCION PARA SUBIR EL DATO A LA PLATAFORMA
+WEB();                                       //FUNCION PARA SUBIR EL DATO A LA PLATAFORMA
 
 }
 
-void WEB()                                  //FUNCION WEN. ESTA FUNCION SUBE LOS DATOS A LA PLATAFORMA.  
+void WEB()                                   //FUNCION WEN. ESTA FUNCION SUBE LOS DATOS A LA PLATAFORMA.  
 {
    
 int x=0;
@@ -316,20 +316,20 @@ PH=PH_CHAR;
 
 
 ////////////////////////////////////////////////////////////
-void COPIA_BUFFER(int P,int W)                       // FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
+void COPIA_BUFFER(int P,int W)                     //FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
 {
   //K=0;
   COPY=1;                                 
     X=0;
       Z=-1;
       for (int i=0; i<99;i++)
-        {BUFFER_USART2[i]=NULL;}                  //CADA POSICION DEL STRING LE PONE CARACTER NULL 00
+        {BUFFER_USART2[i]=NULL;}                  //NULL 00
           I=P; 
             D=W;
  //return K;
 }
 
-void LIMPIA_BUFFER()                          // FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
+void LIMPIA_BUFFER()                              //LIMPIA BUFFER
 {
   COPY=0;
     X=0;
@@ -338,7 +338,7 @@ void LIMPIA_BUFFER()                          // FUNCION QUE LIMPIA TODO EL STRI
           D=0;
 }
 
-void TIME_JSON()                              // FUNCION QUE LIMPIA TODO EL STRING QUE GUARDA LAS VARIABLES DE RX
+void TIME_JSON()                                 
 {
   COPY_TIME=1;
       ZZ=-1;
